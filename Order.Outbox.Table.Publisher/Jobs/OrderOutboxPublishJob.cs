@@ -10,7 +10,7 @@ namespace Order.Outbox.Table.Publisher.Jobs
     {
         public async Task Execute(IJobExecutionContext context)
         {
-            if (OrderOutboxSingletonDatabase.DataReaderState) 
+            if (OrderOutboxSingletonDatabase.DataReaderState)
             {
                 OrderOutboxSingletonDatabase.DataReaderBusy();
 
@@ -24,13 +24,13 @@ namespace Order.Outbox.Table.Publisher.Jobs
                         if (orderCreatedEvent != null)
                         {
                             await publishEndpoint.Publish(orderCreatedEvent);
-                            OrderOutboxSingletonDatabase.ExecuteAsync($"UPDATEORDEROUTBOXES SET PROCESSEDDATE = GETDATE() WHERE ID = '{orderOutbox.Id}'");
+                            OrderOutboxSingletonDatabase.ExecuteAsync($"UPDATE ORDEROUTBOXES SET PROCESSEDDATE = GETDATE() WHERE IdempotentToken = '{orderOutbox.IdempotentToken}'");
                         }
                     }
                 }
 
                 OrderOutboxSingletonDatabase.DataReaderReady();
-                await Console.Out.WriteLineAsync("Order Outbox Table Checked!");
+                await Console.Out.WriteLineAsync("Order outbox table checked!");
             }
         }
     }

@@ -12,7 +12,7 @@ using Order.API.Models.Contexts;
 namespace Order.API.Migrations
 {
     [DbContext(typeof(OrderDbContext))]
-    [Migration("20240220092327_mig_1")]
+    [Migration("20240220114440_mig_1")]
     partial class mig_1
     {
         /// <inheritdoc />

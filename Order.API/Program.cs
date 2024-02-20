@@ -47,6 +47,8 @@ app.MapPost("/create-order", async (CreateOrderVM model, OrderDbContext orderDbC
 
     await orderDbContext.Orders.AddAsync(order);
     await orderDbContext.SaveChangesAsync();
+
+    var idempotentToken = Guid.NewGuid();
     OrderCreatedEvent orderCreatedEvent = new()
     {
         BuyerId = order.BuyerId,
@@ -57,29 +59,27 @@ app.MapPost("/create-order", async (CreateOrderVM model, OrderDbContext orderDbC
             Price = oi.Price,
             Count = oi.Count,
             ProductId = oi.ProductId
-        }).ToList()
+        }).ToList(),
+        IdempotentToken = idempotentToken
     };
-    #region Outbox Pattern Olmadan
+    #region Outbox Pattern Olmaksizin!
     //var sendEndpoint = await sendEndpointProvider.GetSendEndpoint(new Uri($"queue:{RabbitMQSettings.Stock_OrderCreatedEvent}"));
     //await sendEndpoint.Send<OrderCreatedEvent>(orderCreatedEvent);
     #endregion
-
     #region Outbox Pattern Calismasi
     OrderOutbox orderOutbox = new()
     {
         OccuredOn = DateTime.UtcNow,
         ProcessedDate = null,
         Payload = JsonSerializer.Serialize(orderCreatedEvent),
-        Type = orderCreatedEvent.GetType().Name
+        //Type = orderCreatedEvent.GetType().Name
+        Type = nameof(OrderCreatedEvent),
+        IdempotentToken = idempotentToken
     };
     await orderDbContext.OrderOutboxes.AddAsync(orderOutbox);
     await orderDbContext.SaveChangesAsync();
     #endregion
-
 });
-
-
-app.UseHttpsRedirection();
 
 
 app.Run();

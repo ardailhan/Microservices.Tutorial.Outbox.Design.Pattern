@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Stock.Service.Migrations
 {
     /// <inheritdoc />
-    public partial class mig_1 : Migration
+    public partial class mig_1_stock : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

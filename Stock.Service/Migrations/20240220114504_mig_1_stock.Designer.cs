@@ -12,8 +12,8 @@ using Stock.Service.Models.Contexts;
 namespace Stock.Service.Migrations
 {
     [DbContext(typeof(StockDbContext))]
-    [Migration("20240220110945_mig_1")]
-    partial class mig_1
+    [Migration("20240220114504_mig_1_stock")]
+    partial class mig_1_stock
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
