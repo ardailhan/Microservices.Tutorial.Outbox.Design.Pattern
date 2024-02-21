@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Stock.Service", "Stock.Service\Stock.Service.csproj", "{FC3A4734-CA62-41D5-9934-F023D6B47487}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Outbox.Table.Publisher", "Order.Outbox.Table.Publisher\Order.Outbox.Table.Publisher.csproj", "{38D9F417-E11C-403D-9136-12E53DBBFBB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Outbox.Table.Publisher.Service", "Order.Outbox.Table.Publisher\Order.Outbox.Table.Publisher.Service.csproj", "{38D9F417-E11C-403D-9136-12E53DBBFBB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
