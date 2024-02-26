@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /Order.API/appsettings.json
 /Stock.Service/appsettings.json
+/Order.Outbox.Table.Publisher/appsettings.json
